@@ -13,16 +13,37 @@
       <div class="flex justify-start w-1/3 sm:w-1/4">
         <img src="imgs/logo.png" alt="Pride of Africa Logo" class="w-full max-w-[180px] h-auto object-contain">
       </div>
-      <nav class="flex items-center space-x-3 sm:space-x-6 lg:space-x-12 leading-none text-lg">
-        <a href="index.html" class="hover:underline whitespace-nowrap">Novinky</a>
-        <a href="o-nas.html" class="hover:underline whitespace-nowrap">O nás</a>
-        <a href="kontakt.html" class="hover:underline whitespace-nowrap">Kontakt</a>
-      </nav>
+      <div class="relative">
+        <button id="menu-toggle" class="text-white text-lg font-semibold hover:underline focus:outline-none">
+          MENU
+        </button>
+        <nav id="menu-nav" class="hidden absolute right-4 sm:right-0 mt-2 bg-dark-brown/95 backdrop-blur-sm rounded-lg shadow-xl py-2 w-auto">
+          <a href="index.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Novinky</a>
+          <a href="o-nas.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">O nás</a>
+          <a href="vrhy.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Vrhy</a>
+          <a href="nasi-psi.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Naši psi</a>
+          <a href="galerie.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Galerie</a>
+          <a href="kontakt.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Kontakt</a>
+        </nav>
+      </div>
     </div>
   </header>
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      const menu = document.getElementById('menu-nav');
+      menu.classList.toggle('hidden');
+    });
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('menu-nav');
+      const toggle = document.getElementById('menu-toggle');
+      if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+        menu.classList.add('hidden');
+      }
+    });
+  </script>
 
   <main class="container mx-auto px-4 py-8 mb-8">
-    <h1 class="text-center text-2xl text-white underline font-bold mb-6">O nás</h1>
+    <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl text-white underline font-bold mb-8">O nás</h1>
 
     <div class="bg-yellow-100 shadow-md rounded-2xl p-4 sm:p-6 max-w-6xl mx-auto">
       

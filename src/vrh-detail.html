@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pride of Africa - Vrh A</title>
+  <link rel="stylesheet" href="./output.css">
+</head>
+<body class="bg-gradient-to-r from-light-brown to-black via-dark-brown text-gray-800 min-h-screen flex flex-col">
+
+  <header class="text-white bg-dark-brown/90 backdrop-blur-sm sticky top-0 z-50 shadow-lg">
+    <div class="container mx-auto px-3 py-2 flex items-center justify-between gap-x-4 sm:gap-x-8 lg:gap-x-16">
+      <div class="flex justify-start w-1/3 sm:w-1/4">
+        <img src="imgs/logo.png" alt="Pride of Africa Logo" class="w-full max-w-[180px] h-auto object-contain">
+      </div>
+      <div class="relative">
+        <button id="menu-toggle" class="text-white text-lg font-semibold hover:underline focus:outline-none">
+          MENU
+        </button>
+        <nav id="menu-nav" class="hidden absolute right-4 sm:right-0 mt-2 bg-dark-brown/95 backdrop-blur-sm rounded-lg shadow-xl py-2 w-auto">
+          <a href="index.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Novinky</a>
+          <a href="o-nas.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">O nás</a>
+          <a href="vrhy.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Vrhy</a>
+          <a href="nasi-psi.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Naši psi</a>
+          <a href="galerie.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Galerie</a>
+          <a href="kontakt.html" class="block pl-4 pr-3 py-2 hover:bg-dark-brown whitespace-nowrap">Kontakt</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <script>
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      const menu = document.getElementById('menu-nav');
+      menu.classList.toggle('hidden');
+    });
+    document.addEventListener('click', function(event) {
+      const menu = document.getElementById('menu-nav');
+      const toggle = document.getElementById('menu-toggle');
+      if (!menu.contains(event.target) && !toggle.contains(event.target)) {
+        menu.classList.add('hidden');
+      }
+    });
+  </script>
+
+  <main class="flex-grow container mx-auto px-4 py-8 mb-8">
+    <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl text-white underline font-bold mb-8 uppercase" id="vrh-title">VRH A</h1>
+
+    <div class="bg-yellow-100 shadow-md rounded-2xl p-4 sm:p-6 max-w-6xl mx-auto">
+      
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-dark-brown mb-4">O vrhu:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p class="text-gray-700 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <p class="text-gray-700">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div>
+            <img src="imgs/18-Phoebe_25fb.jpg" alt="O vrhu" class="w-full h-64 object-cover rounded-lg shadow-lg">
+          </div>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-dark-brown mb-4">Fotky štěňat:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <img src="imgs/304-C_litter_day_73-154.jpg" alt="Štěňata 1" class="w-full h-64 object-cover rounded-lg shadow-lg">
+          <img src="imgs/303-C_litter_day_73-046.jpg" alt="Štěňata 2" class="w-full h-64 object-cover rounded-lg shadow-lg">
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="text-xl font-bold text-dark-brown mb-4">Fotky rodičů:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <img src="imgs/298-C_litter_day_54-4.jpg" alt="Rodič 1" class="w-full h-64 object-cover rounded-lg shadow-lg">
+          <img src="imgs/18-Phoebe_25fb.jpg" alt="Rodič 2" class="w-full h-64 object-cover rounded-lg shadow-lg">
+          <img src="imgs/304-C_litter_day_73-154.jpg" alt="Rodič 3" class="w-full h-64 object-cover rounded-lg shadow-lg">
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-dark-brown mb-4">Seznam štěňat:</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div class="p-4">
+            <h3 class="font-bold text-dark-brown mb-2">Alex</h3>
+            <img src="imgs/304-C_litter_day_73-154.jpg" alt="Alex" class="w-full h-32 object-cover rounded-lg mb-2">
+            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-dark-brown mb-2">Angel</h3>
+            <img src="imgs/303-C_litter_day_73-046.jpg" alt="Angel" class="w-full h-32 object-cover rounded-lg mb-2">
+            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-dark-brown mb-2">Aura</h3>
+            <img src="imgs/298-C_litter_day_54-4.jpg" alt="Aura" class="w-full h-32 object-cover rounded-lg mb-2">
+            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-dark-brown mb-2">Amy</h3>
+            <img src="imgs/18-Phoebe_25fb.jpg" alt="Amy" class="w-full h-32 object-cover rounded-lg mb-2">
+            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-dark-brown mb-2">Aris</h3>
+            <img src="imgs/304-C_litter_day_73-154.jpg" alt="Aris" class="w-full h-32 object-cover rounded-lg mb-2">
+            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="bg-dark-brown text-white py-4 mt-auto">
+    <div class="container mx-auto px-4 text-center">
+      <img src="imgs/logo.png" alt="Pride Of Africa Logo" class="mx-auto mb-4 w-28 object-contain">
+      <p class="text-sm">Petra & Ondřej Čepkovi<br>Pride Of Africa - Rhodesian Ridgeback Kennel</p>
+      <p class="text-sm mt-2">Cukrovar 436<br>281 04 Plaňany<br>Česká republika</p>
+      <p class="text-sm mt-2">Telefon: +420 444 555 444<br>Telefon: +420 222 333 222</p>
+      <p class="text-sm mt-2">E–mail: <a href="mailto:info@prideofafrica.cz" class="underline">info@prideofafrica.cz</a></p>
+      <p class="text-sm mt-4">Copyright © PrideOfAfrica.cz</p>
+      <p class="text-sm mt-2">Veškerý grafický, textový a jiný obsah či součást těchto stránek je předmětem autorského práva ve smyslu Autorského zákona č. 121/2000 §11.</p>
+    </div>
+  </footer>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const vrh = urlParams.get('vrh') || 'A';
+    document.getElementById('vrh-title').textContent = 'VRH ' + vrh;
+    document.title = 'Pride of Africa - Vrh ' + vrh;
+  </script>
+
+</body>
+</html>
+
