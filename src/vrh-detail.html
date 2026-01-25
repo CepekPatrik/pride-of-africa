@@ -71,40 +71,16 @@
       <section class="mb-8">
         <h2 class="text-xl font-bold text-dark-brown mb-4">Fotky rodičů:</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <img src="imgs/298-C_litter_day_54-4.jpg" alt="Rodič 1" class="w-full h-64 object-cover rounded-lg shadow-lg">
+          <img src="imgs/rodic1.png" alt="Rodič 1" class="w-full h-64 object-cover rounded-lg shadow-lg">
           <img src="imgs/18-Phoebe_25fb.jpg" alt="Rodič 2" class="w-full h-64 object-cover rounded-lg shadow-lg">
-          <img src="imgs/304-C_litter_day_73-154.jpg" alt="Rodič 3" class="w-full h-64 object-cover rounded-lg shadow-lg">
+          <img src="imgs/rodic2.png" alt="Rodič 3" class="w-full h-64 object-cover rounded-lg shadow-lg">
         </div>
       </section>
 
       <section>
         <h2 class="text-xl font-bold text-dark-brown mb-4">Seznam štěňat:</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div class="p-4">
-            <h3 class="font-bold text-dark-brown mb-2">Alex</h3>
-            <img src="imgs/304-C_litter_day_73-154.jpg" alt="Alex" class="w-full h-32 object-cover rounded-lg mb-2">
-            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-dark-brown mb-2">Angel</h3>
-            <img src="imgs/303-C_litter_day_73-046.jpg" alt="Angel" class="w-full h-32 object-cover rounded-lg mb-2">
-            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-dark-brown mb-2">Aura</h3>
-            <img src="imgs/298-C_litter_day_54-4.jpg" alt="Aura" class="w-full h-32 object-cover rounded-lg mb-2">
-            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-dark-brown mb-2">Amy</h3>
-            <img src="imgs/18-Phoebe_25fb.jpg" alt="Amy" class="w-full h-32 object-cover rounded-lg mb-2">
-            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-dark-brown mb-2">Aris</h3>
-            <img src="imgs/304-C_litter_day_73-154.jpg" alt="Aris" class="w-full h-32 object-cover rounded-lg mb-2">
-            <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </div>
+        <div id="puppies-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- Štěňata budou dynamicky vložena pomocí JavaScriptu -->
         </div>
       </section>
     </div>
@@ -127,6 +103,39 @@
     const vrh = urlParams.get('vrh') || 'A';
     document.getElementById('vrh-title').textContent = 'VRH ' + vrh;
     document.title = 'Pride of Africa - Vrh ' + vrh;
+
+    // Definice jmen štěňat podle písmene vrhu
+    const puppiesNames = {
+      'A': ['Alex', 'Angel', 'Aura', 'Amy', 'Aris'],
+      'B': ['Barney', 'Blesk', 'Buddy', 'Buffy', 'Bella'],
+      'C': ['Charlie', 'Carlos', 'Chloe', 'Candy', 'Carmen'],
+      'D': ['Dexter', 'Diego', 'Dante', 'Daisy', 'Dora']
+    };
+
+    // Obrázky pro štěňata (cyklicky se opakují)
+    const puppyImages = [
+      'imgs/304-C_litter_day_73-154.jpg',
+      'imgs/303-C_litter_day_73-046.jpg',
+      'imgs/298-C_litter_day_54-4.jpg',
+      'imgs/stene.png',
+      'imgs/stene2.png'
+    ];
+
+    // Získání jmen pro aktuální vrh
+    const currentPuppies = puppiesNames[vrh.toUpperCase()] || puppiesNames['A'];
+
+    // Vytvoření HTML pro štěňata
+    const puppiesList = document.getElementById('puppies-list');
+    currentPuppies.forEach((name, index) => {
+      const puppyDiv = document.createElement('div');
+      puppyDiv.className = 'p-4';
+      puppyDiv.innerHTML = `
+        <h3 class="font-bold text-dark-brown mb-2">${name}</h3>
+        <img src="${puppyImages[index % puppyImages.length]}" alt="${name}" class="w-full h-56 object-cover rounded-lg mb-2">
+        <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      `;
+      puppiesList.appendChild(puppyDiv);
+    });
   </script>
 
 </body>
