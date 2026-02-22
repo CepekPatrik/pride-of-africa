@@ -1,0 +1,89 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "src/imgs"
+public_folder: "/imgs"
+
+collections:
+  - name: "data"
+    label: "Obsah webu"
+    files:
+      - name: "news"
+        label: "Novinky"
+        file: "data/news.json"
+        format: "json"
+        fields:
+          - label: "Položky"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}} — {{fields.date}}"
+            fields:
+              - { label: "Nadpis", name: "title", widget: "string" }
+              - { label: "Datum", name: "date", widget: "datetime", format: "DD.MM.YYYY", time_format: false }
+              - { label: "Obrázek", name: "image", widget: "image" }
+              - { label: "Text", name: "text", widget: "text" }
+
+      - name: "litters"
+        label: "Vrhy"
+        file: "data/litters.json"
+        format: "json"
+        fields:
+          - label: "Vrhy"
+            name: "items"
+            widget: "list"
+            summary: "Vrh {{fields.letter}}"
+            fields:
+              - { label: "Písmeno (A, B, C…)", name: "letter", widget: "string" }
+              - { label: "Obrázek na kartě (vrhy.html)", name: "coverImage", widget: "image" }
+              - { label: "Krátký popis (vrhy.html)", name: "description", widget: "text" }
+
+              - label: "Detail vrhu (vrh-detail.html)"
+                name: "detail"
+                widget: "object"
+                fields:
+                  - { label: "Hlavní obrázek", name: "heroImage", widget: "image" }
+                  - { label: "Text 1", name: "text1", widget: "text" }
+                  - { label: "Text 2", name: "text2", widget: "text", required: false }
+                  - label: "Fotky štěňat"
+                    name: "puppyPhotos"
+                    widget: "list"
+                    field: { label: "Foto", name: "image", widget: "image" }
+                  - label: "Fotky rodičů"
+                    name: "parentPhotos"
+                    widget: "list"
+                    field: { label: "Foto", name: "image", widget: "image" }
+
+              - label: "Seznam štěňat"
+                name: "puppies"
+                widget: "list"
+                fields:
+                  - { label: "Jméno", name: "name", widget: "string" }
+                  - { label: "Foto", name: "image", widget: "image" }
+                  - { label: "Popis", name: "text", widget: "text" }
+
+      - name: "dogs"
+        label: "Naši psi"
+        file: "data/dogs.json"
+        format: "json"
+        fields:
+          - label: "Psi"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Jméno", name: "name", widget: "string" }
+              - { label: "Foto", name: "image", widget: "image" }
+              - { label: "Popis", name: "text", widget: "text" }
+
+      - name: "gallery"
+        label: "Galerie"
+        file: "data/gallery.json"
+        format: "json"
+        fields:
+          - label: "Obrázky"
+            name: "items"
+            widget: "list"
+            fields:
+              - { label: "Foto", name: "image", widget: "image" }
+              - { label: "Alt text", name: "alt", widget: "string", required: false }
