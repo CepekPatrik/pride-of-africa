@@ -60,117 +60,112 @@
     <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl text-white underline font-bold mb-8">Novinky</h1>
 
     <div id="news-grid" class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-4xl mx-auto"></div>
+    <div id="news-pagination" class="mt-6 flex justify-center space-x-2"></div>
 
 <script>
-  (async function renderNewsWithPagination() {
-    const grid = document.getElementById("news-grid");
-    const pagination = document.getElementById("news-pagination");
+document.addEventListener("DOMContentLoaded", async () => {
+  const grid = document.getElementById("news-grid");
+  const pagination = document.getElementById("news-pagination");
+  if (!grid || !pagination) return;
 
-    const PER_PAGE = 4;
+  const PER_PAGE = 4;
 
-    function getPageFromUrl() {
-      const params = new URLSearchParams(window.location.search);
-      const p = parseInt(params.get("page") || "1", 10);
-      return Number.isFinite(p) && p > 0 ? p : 1;
-    }
+  const getPageFromUrl = () => {
+    const params = new URLSearchParams(window.location.search);
+    const p = parseInt(params.get("page") || "1", 10);
+    return Number.isFinite(p) && p > 0 ? p : 1;
+  };
 
-    function setPageToUrl(page) {
-      const url = new URL(window.location.href);
-      url.searchParams.set("page", String(page));
-      history.pushState({ page }, "", url.toString());
-    }
+  const setPageToUrl = (page) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", String(page));
+    history.pushState({ page }, "", url.toString());
+  };
 
-    function normalizeImgPath(img) {
-      if (!img) return "";
-      return img.startsWith("/") ? img : "/" + img;
-    }
+  const normalizeImgPath = (img) => {
+    if (!img) return "";
+    return img.startsWith("/") ? img : "/" + img;
+  };
 
-    function renderPage(items, page) {
-      const totalPages = Math.max(1, Math.ceil(items.length / PER_PAGE));
-      const currentPage = Math.min(Math.max(1, page), totalPages);
+  const renderPage = (items, page) => {
+    const totalPages = Math.max(1, Math.ceil(items.length / PER_PAGE));
+    const currentPage = Math.min(Math.max(1, page), totalPages);
 
-      const start = (currentPage - 1) * PER_PAGE;
-      const pageItems = items.slice(start, start + PER_PAGE);
+    const start = (currentPage - 1) * PER_PAGE;
+    const pageItems = items.slice(start, start + PER_PAGE);
 
-      if (items.length === 0) {
-        grid.innerHTML = `<p class="text-white text-center col-span-full">Zatím žádné novinky.</p>`;
-      } else {
-        grid.innerHTML = pageItems
-          .map((n) => {
-            const title = n.title || "";
-            const date = n.date || "";
-            const text = n.text || "";
-            const img = normalizeImgPath(n.image || "");
+    if (items.length === 0) {
+      grid.innerHTML = `<p class="text-white text-center col-span-full">Zatím žádné novinky.</p>`;
+    } else {
+      grid.innerHTML = pageItems.map((n) => {
+        const title = n.title || "";
+        const date = n.date || "";
+        const text = n.text || "";
+        const img = normalizeImgPath(n.image || "");
 
-            return `
-              <div class="bg-yellow-100 shadow-md rounded-2xl overflow-hidden p-4 px-8 sm:p-6 sm:px-16 lg:px-24 flex flex-col items-center">
-                ${
-                  img
-                    ? `<div class="w-full aspect-video">
-                         <img src="${img}" alt="${title || "Novinka"}" loading="lazy"
-                              class="w-full h-full object-cover shadow-xl rounded-lg">
-                       </div>`
-                    : ``
-                }
-                <h2 class="font-semibold mt-3">${title}</h2>
-                <p class="text-sm text-gray-600">${date}</p>
-                <p class="text-sm text-center mt-2">${text}</p>
+        return `
+          <div class="bg-yellow-100 shadow-md rounded-2xl overflow-hidden p-4 px-8 sm:p-6 sm:px-16 lg:px-24 flex flex-col items-center">
+            ${img ? `
+              <div class="w-full aspect-video">
+                <img src="${img}" alt="${title || "Novinka"}" loading="lazy"
+                     class="w-full h-full object-cover shadow-xl rounded-lg">
               </div>
-            `;
-          })
-          .join("");
-      }
-
-      if (items.length <= PER_PAGE) {
-        pagination.innerHTML = "";
-        return;
-      }
-
-      pagination.innerHTML = "";
-      for (let i = 1; i <= totalPages; i++) {
-        const isActive = i === currentPage;
-
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.textContent = String(i);
-
-        btn.className =
-          "w-10 h-10 bg-gray-300 text-gray-800 hover:bg-yellow-100 hover:text-gray-900 rounded-2xl" +
-          (isActive ? " bg-yellow-100 text-gray-900" : "");
-
-        btn.addEventListener("click", () => {
-          setPageToUrl(i);
-          renderPage(items, i);
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        });
-
-        pagination.appendChild(btn);
-      }
+            ` : ""}
+            <h2 class="font-semibold mt-3">${title}</h2>
+            <p class="text-sm text-gray-600">${date}</p>
+            <p class="text-sm text-center mt-2">${text}</p>
+          </div>
+        `;
+      }).join("");
     }
 
-    try {
-      const res = await fetch("/data/news.json", { cache: "no-store" });
-      if (!res.ok) throw new Error("HTTP " + res.status);
+    if (items.length <= PER_PAGE) {
+      pagination.innerHTML = "";
+      return;
+    }
 
-      const data = await res.json();
-      const items = Array.isArray(data.items) ? data.items : [];
+    pagination.innerHTML = "";
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = String(i);
 
-      const sorted = items;
+      const isActive = i === currentPage;
+      btn.className = isActive
+        ? "w-10 h-10 bg-yellow-100 text-gray-900 rounded-2xl"
+        : "w-10 h-10 bg-gray-300 text-gray-800 hover:bg-yellow-100 hover:text-gray-900 rounded-2xl";
 
-      renderPage(sorted, getPageFromUrl());
-
-      window.addEventListener("popstate", () => {
-        renderPage(sorted, getPageFromUrl());
+      btn.addEventListener("click", () => {
+        setPageToUrl(i);
+        renderPage(items, i);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       });
-    } catch (e) {
-      grid.innerHTML = `<p class="text-white text-center col-span-full">Nepodařilo se načíst novinky.</p>`;
-      pagination.innerHTML = "";
-      console.error(e);
-    }
-  })();
-</script>
 
-    <div id="news-pagination" class="mt-6 flex justify-center space-x-2"></div>
+      pagination.appendChild(btn);
+    }
+  };
+
+  try {
+    const res = await fetch("/data/news.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("HTTP " + res.status);
+
+    const data = await res.json();
+    const items = Array.isArray(data.items) ? data.items : [];
+
+    const ordered = items;
+
+    renderPage(ordered, getPageFromUrl());
+
+    window.addEventListener("popstate", () => {
+      renderPage(ordered, getPageFromUrl());
+    });
+  } catch (e) {
+    console.error(e);
+    grid.innerHTML = `<p class="text-white text-center col-span-full">Nepodařilo se načíst novinky.</p>`;
+    pagination.innerHTML = "";
+  }
+});
+</script>
   </main>
 
   <footer class="bg-dark-brown text-white py-4 mt-auto">
