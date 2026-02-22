@@ -1,1 +1,28 @@
-{ "items": [] }
+{
+  "items": [
+    {
+      "title": "Štěňata objevují svět",
+      "date": "23.5. 2022",
+      "image": "imgs/304-C_litter_day_73-154.jpg",
+      "text": "Naše nejmladší přírůstky už objevují svět kolem sebe! Jsou hravá, zvědavá a připravená dělat radost novým majitelům."
+    },
+    {
+      "title": "Společné chvíle ve smečce",
+      "date": "23.5. 2022",
+      "image": "imgs/303-C_litter_day_73-046.jpg",
+      "text": "Naše smečka tráví čas společnými procházkami a hrami na zahradě. Společenskost a vyrovnanost jsou pro nás klíčové."
+    },
+    {
+      "title": "Zvědavý pohled nového člena",
+      "date": "23.5. 2022",
+      "image": "imgs/298-C_litter_day_54-4.jpg",
+      "text": "Toto zlaté štěně už teď projevuje silnou osobnost. Hledá tu nejlepší rodinu, která mu nabídne lásku a péči."
+    },
+    {
+      "title": "Věrní a oddaní společníci",
+      "date": "23.5. 2022",
+      "image": "imgs/18-Phoebe_25fb.jpg",
+      "text": "Naši psi jsou nejen krásní, ale i loajální a oddaní. Jsou to výborní parťáci pro aktivní rodiny i zkušené chovatele."
+    }
+  ]
+}
