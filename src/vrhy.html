@@ -43,54 +43,61 @@
   </script>
 
   <main class="flex-grow container mx-auto px-8 py-6">
-    <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl text-white underline font-bold mb-8 uppercase">VRHY</h1>
+  <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl text-white underline font-bold mb-8 uppercase">VRHY</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-6">
-      <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-        <h2 class="text-xl font-bold text-dark-brown mb-3 text-center">Vrh A</h2>
-        <div class="mb-3">
-          <img src="imgs/304-C_litter_day_73-154.jpg" alt="Vrh A" class="w-full h-48 object-cover rounded-lg">
-        </div>
-        <p class="text-gray-700 text-sm mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-        <div class="text-center">
-          <a href="vrh-detail.html?vrh=A" class="inline-block bg-dark-brown text-white px-4 py-2 rounded-lg hover:bg-light-brown transition-colors text-sm">Více informací</a>
-        </div>
-      </div>
+  <div id="litters-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-6"></div>
 
-      <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-        <h2 class="text-xl font-bold text-dark-brown mb-3 text-center">Vrh B</h2>
-        <div class="mb-3">
-          <img src="imgs/303-C_litter_day_73-046.jpg" alt="Vrh B" class="w-full h-48 object-cover rounded-lg">
-        </div>
-        <p class="text-gray-700 text-sm mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-        <div class="text-center">
-          <a href="vrh-detail.html?vrh=B" class="inline-block bg-dark-brown text-white px-4 py-2 rounded-lg hover:bg-light-brown transition-colors text-sm">Více informací</a>
-        </div>
-      </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const grid = document.getElementById("litters-grid");
+      if (!grid) return;
 
-      <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-        <h2 class="text-xl font-bold text-dark-brown mb-3 text-center">Vrh C</h2>
-        <div class="mb-3">
-          <img src="imgs/298-C_litter_day_54-4.jpg" alt="Vrh C" class="w-full h-48 object-cover rounded-lg">
-        </div>
-        <p class="text-gray-700 text-sm mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-        <div class="text-center">
-          <a href="vrh-detail.html?vrh=C" class="inline-block bg-dark-brown text-white px-4 py-2 rounded-lg hover:bg-light-brown transition-colors text-sm">Více informací</a>
-        </div>
-      </div>
+      const norm = (p) => (!p ? "" : (p.startsWith("/") ? p : "/" + p));
 
-      <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-        <h2 class="text-xl font-bold text-dark-brown mb-3 text-center">Vrh D</h2>
-        <div class="mb-3">
-          <img src="imgs/stene.png" alt="Vrh D" class="w-full h-48 object-cover rounded-lg">
-        </div>
-        <p class="text-gray-700 text-sm mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</p>
-        <div class="text-center">
-          <a href="vrh-detail.html?vrh=D" class="inline-block bg-dark-brown text-white px-4 py-2 rounded-lg hover:bg-light-brown transition-colors text-sm">Více informací</a>
-        </div>
-      </div>
-    </div>
-  </main>
+      try {
+        const res = await fetch("/data/litters.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
+        const data = await res.json();
+        let items = Array.isArray(data.items) ? data.items : [];
+
+        items = [...items].sort((a,b) => (a.letter||"").localeCompare((b.letter||""), "cs", { sensitivity: "base" }));
+
+        if (items.length === 0) {
+          grid.innerHTML = `<p class="text-white text-center col-span-full">Zatím žádné vrhy.</p>`;
+          return;
+        }
+
+        grid.innerHTML = items.map(l => {
+          const letter = (l.letter || "").toUpperCase();
+          const img = norm(l.coverImage || "");
+          const desc = l.description || "";
+
+          return `
+            <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
+              <h2 class="text-xl font-bold text-dark-brown mb-3 text-center">Vrh ${letter}</h2>
+              ${img ? `
+                <div class="mb-3">
+                  <img src="${img}" alt="Vrh ${letter}" class="w-full h-48 object-cover rounded-lg">
+                </div>
+              ` : ""}
+              <p class="text-gray-700 text-sm mb-4">${desc}</p>
+              <div class="text-center">
+                <a href="vrh-detail.html?vrh=${encodeURIComponent(letter)}"
+                   class="inline-block bg-dark-brown text-white px-4 py-2 rounded-lg hover:bg-light-brown transition-colors text-sm">
+                   Více informací
+                </a>
+              </div>
+            </div>
+          `;
+        }).join("");
+      } catch (e) {
+        console.error(e);
+        grid.innerHTML = `<p class="text-white text-center col-span-full">Nepodařilo se načíst vrhy.</p>`;
+      }
+    });
+  </script>
+</main>
 
   <footer class="bg-dark-brown text-white py-4 mt-auto">
     <div class="container mx-auto px-4 text-center">

@@ -1,1 +1,108 @@
-{ "items": [] }
+{
+  "items": [
+    {
+      "letter": "A",
+      "coverImage": "/imgs/304-C_litter_day_73-154.jpg",
+      "description": "První vrh naší chovatelské stanice. Vyrovnaná, zvědavá štěňata s velkým temperamentem a chutí objevovat svět.",
+      "detail": {
+        "heroImage": "/imgs/304-C_litter_day_73-154.jpg",
+        "text1": "Vrh A je pro nás výjimečný – první společné kroky, první zkušenosti a spousta radosti. Štěňata rostla v domácím prostředí, zvyklá na běžný chod domácnosti.",
+        "text2": "Od malička jsme kladli důraz na socializaci, kontakt s lidmi a postupné seznamování s novými podněty.",
+        "puppyPhotos": [
+          "/imgs/304-C_litter_day_73-154.jpg",
+          "/imgs/303-C_litter_day_73-046.jpg"
+        ],
+        "parentPhotos": [
+          "/imgs/rodic1.png",
+          "/imgs/18-Phoebe_25fb.jpg",
+          "/imgs/rodic2.png"
+        ]
+      },
+      "puppies": [
+        { "name": "Alex",  "image": "/imgs/304-C_litter_day_73-154.jpg", "text": "Hravý a odvážný. Rád zkoumá nové věci a rychle se učí." },
+        { "name": "Angel", "image": "/imgs/303-C_litter_day_73-046.jpg", "text": "Jemnější povaha, velmi kontaktní a miluje pozornost." },
+        { "name": "Aura",  "image": "/imgs/298-C_litter_day_54-4.jpg",  "text": "Zvědavá a vyrovnaná. Dobře reaguje na klidné vedení." },
+        { "name": "Amy",   "image": "/imgs/stene.png",                "text": "Energická a hravá. Skvělá parťačka na aktivní život." },
+        { "name": "Aris",  "image": "/imgs/stene2.png",               "text": "Sebevědomý a mazlivý. Rád je u lidí a v centru dění." }
+      ]
+    },
+    {
+      "letter": "B",
+      "coverImage": "/imgs/303-C_litter_day_73-046.jpg",
+      "description": "Vrh B – hravá štěňata se silným charakterem. Ideální pro aktivní rodiny a sportovní vyžití.",
+      "detail": {
+        "heroImage": "/imgs/303-C_litter_day_73-046.jpg",
+        "text1": "Vrh B navazuje na naši filozofii – zdraví, vyrovnaná povaha a správná socializace od prvních týdnů.",
+        "text2": "Štěňata poznávala různé povrchy, zvuky i krátké procházky a byla pravidelně v kontaktu s lidmi.",
+        "puppyPhotos": [
+          "/imgs/303-C_litter_day_73-046.jpg",
+          "/imgs/298-C_litter_day_54-4.jpg"
+        ],
+        "parentPhotos": [
+          "/imgs/rodic1.png",
+          "/imgs/18-Phoebe_25fb.jpg",
+          "/imgs/rodic2.png"
+        ]
+      },
+      "puppies": [
+        { "name": "Barney", "image": "/imgs/304-C_litter_day_73-154.jpg", "text": "Přátelský, stabilní, skvělý parťák do rodiny." },
+        { "name": "Blesk",  "image": "/imgs/303-C_litter_day_73-046.jpg", "text": "Rychlý a energický, miluje pohyb a hru." },
+        { "name": "Buddy",  "image": "/imgs/298-C_litter_day_54-4.jpg",  "text": "Vyrovnaný a klidný, rád pozoruje a pak jedná." },
+        { "name": "Buffy",  "image": "/imgs/stene.png",                 "text": "Zvědavá a hravá, výborná na trénink." },
+        { "name": "Bella",  "image": "/imgs/stene2.png",                "text": "Mazlivá a kontaktní, rychle si vytváří vztah." }
+      ]
+    },
+    {
+      "letter": "C",
+      "coverImage": "/imgs/298-C_litter_day_54-4.jpg",
+      "description": "Vrh C – vyrovnaný, přátelský a velmi zvídavý. Štěňata s krásnou stavbou těla a typem.",
+      "detail": {
+        "heroImage": "/imgs/298-C_litter_day_54-4.jpg",
+        "text1": "Vrh C vyrůstal s důrazem na klidné prostředí, správnou socializaci a pozitivní zkušenosti s lidmi.",
+        "text2": "Každé štěně se vyvíjí jinak – díky pravidelnému kontaktu jsme mohli dobře sledovat povahu i temperament.",
+        "puppyPhotos": [
+          "/imgs/304-C_litter_day_73-154.jpg",
+          "/imgs/298-C_litter_day_54-4.jpg"
+        ],
+        "parentPhotos": [
+          "/imgs/rodic1.png",
+          "/imgs/18-Phoebe_25fb.jpg",
+          "/imgs/rodic2.png"
+        ]
+      },
+      "puppies": [
+        { "name": "Charlie", "image": "/imgs/304-C_litter_day_73-154.jpg", "text": "Zvědavý a odvážný, rád objevuje nové věci." },
+        { "name": "Carlos",  "image": "/imgs/303-C_litter_day_73-046.jpg", "text": "Energický, velmi hravý, vhodný pro aktivní domov." },
+        { "name": "Chloe",   "image": "/imgs/298-C_litter_day_54-4.jpg",  "text": "Klidnější a mazlivá, miluje společnost lidí." },
+        { "name": "Candy",   "image": "/imgs/stene.png",                 "text": "Veselá, kontaktní, s chutí učit se nové věci." },
+        { "name": "Carmen",  "image": "/imgs/stene2.png",                "text": "Vyrovnaná, pozorná a velmi vnímavá." }
+      ]
+    },
+    {
+      "letter": "D",
+      "coverImage": "/imgs/18-Phoebe_25fb.jpg",
+      "description": "Vrh D – silné osobnosti, přirozená sebejistota a skvělý kontakt s člověkem.",
+      "detail": {
+        "heroImage": "/imgs/18-Phoebe_25fb.jpg",
+        "text1": "Vrh D pokračuje v našem cíli – vychovávat ridgebacky s vyrovnanou povahou, správnou socializací a radostí z pohybu.",
+        "text2": "Štěňata byla postupně seznamována s novými situacemi a učila se zvládat běžné podněty.",
+        "puppyPhotos": [
+          "/imgs/18-Phoebe_25fb.jpg",
+          "/imgs/303-C_litter_day_73-046.jpg"
+        ],
+        "parentPhotos": [
+          "/imgs/rodic1.png",
+          "/imgs/18-Phoebe_25fb.jpg",
+          "/imgs/rodic2.png"
+        ]
+      },
+      "puppies": [
+        { "name": "Dexter", "image": "/imgs/304-C_litter_day_73-154.jpg", "text": "Odvážný a samostatný, rychle chápe nové věci." },
+        { "name": "Diego",  "image": "/imgs/303-C_litter_day_73-046.jpg", "text": "Přátelský, velmi kontaktní, miluje hru." },
+        { "name": "Dante",  "image": "/imgs/298-C_litter_day_54-4.jpg",  "text": "Vyrovnaný a klidný, pozorný k lidem." },
+        { "name": "Daisy",  "image": "/imgs/stene.png",                 "text": "Energická, veselá a velmi zvídavá." },
+        { "name": "Dora",   "image": "/imgs/stene2.png",                "text": "Mazlivá, citlivá a dobře reaguje na vedení." }
+      ]
+    }
+  ]
+}

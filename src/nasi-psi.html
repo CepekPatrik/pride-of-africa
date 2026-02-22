@@ -43,42 +43,47 @@
   </script>
 
   <main class="flex-grow container mx-auto px-8 py-6">
-    <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl text-white underline font-bold mb-8 uppercase">NAŠI PSI</h1>
+  <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl text-white underline font-bold mb-8 uppercase">NAŠI PSI</h1>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-      <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-        <h2 class="text-xl font-bold text-dark-brown mb-3">Phoebe</h2>
-        <div class="mb-3">
-          <img src="imgs/Phoebe.png" alt="Phoebe" class="w-full h-64 object-cover rounded-lg">
-        </div>
-        <p class="text-gray-700 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </div>
+  <div id="dogs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"></div>
 
-      <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-        <h2 class="text-xl font-bold text-dark-brown mb-3">Buffy</h2>
-        <div class="mb-3">
-          <img src="imgs/Buffy.png" alt="Buffy" class="w-full h-64 object-cover rounded-lg">
-        </div>
-        <p class="text-gray-700 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const grid = document.getElementById("dogs-grid");
+      if (!grid) return;
 
-      <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-        <h2 class="text-xl font-bold text-dark-brown mb-3">Amanda</h2>
-        <div class="mb-3">
-          <img src="imgs/Amanda.png" alt="Amanda" class="w-full h-64 object-cover rounded-lg">
-        </div>
-        <p class="text-gray-700 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </div>
+      const norm = (p) => (!p ? "" : (p.startsWith("/") ? p : "/" + p));
 
-      <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
-        <h2 class="text-xl font-bold text-dark-brown mb-3">Liliana</h2>
-        <div class="mb-3">
-          <img src="imgs/Liliana.png" alt="Liliana" class="w-full h-64 object-cover rounded-lg">
-        </div>
-        <p class="text-gray-700 text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </div>
-    </div>
-  </main>
+      try {
+        const res = await fetch("/data/dogs.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+
+        const data = await res.json();
+        const items = Array.isArray(data.items) ? data.items : [];
+
+        if (items.length === 0) {
+          grid.innerHTML = `<p class="text-white text-center col-span-full">Zatím žádní psi.</p>`;
+          return;
+        }
+
+        grid.innerHTML = items.map(d => `
+          <div class="bg-yellow-100 rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow">
+            <h2 class="text-xl font-bold text-dark-brown mb-3">${d.name || ""}</h2>
+            ${d.image ? `
+              <div class="mb-3">
+                <img src="${norm(d.image)}" alt="${d.name || "Pes"}" class="w-full h-64 object-cover rounded-lg">
+              </div>
+            ` : ""}
+            <p class="text-gray-700 text-sm">${d.text || ""}</p>
+          </div>
+        `).join("");
+      } catch (e) {
+        console.error(e);
+        grid.innerHTML = `<p class="text-white text-center col-span-full">Nepodařilo se načíst psy.</p>`;
+      }
+    });
+  </script>
+</main>
 
   <footer class="bg-dark-brown text-white py-4 mt-auto">
     <div class="container mx-auto px-4 text-center">

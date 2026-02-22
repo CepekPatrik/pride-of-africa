@@ -1,1 +1,24 @@
-{ "items": [] }
+{
+  "items": [
+    {
+      "name": "Phoebe",
+      "image": "/imgs/Phoebe.png",
+      "text": "Vyrovnaná a přátelská fenka s typickou ridgeback povahou. Skvělá parťačka na výlety i domácí pohodu."
+    },
+    {
+      "name": "Buffy",
+      "image": "/imgs/Buffy.png",
+      "text": "Energická a zvědavá, miluje pohyb a práci s člověkem. Ráda se učí nové věci a je velmi kontaktní."
+    },
+    {
+      "name": "Amanda",
+      "image": "/imgs/Amanda.png",
+      "text": "Jemná, citlivá a pozorná fenka. Výborně zapadá do smečky a dobře reaguje na klidné vedení."
+    },
+    {
+      "name": "Liliana",
+      "image": "/imgs/Liliana.png",
+      "text": "Sebevědomá fenka s krásným výrazem a klidnou hlavou. Má ráda rutinu a stabilní prostředí."
+    }
+  ]
+}

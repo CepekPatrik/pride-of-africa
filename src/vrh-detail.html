@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pride of Africa - Vrh A</title>
+  <title>Pride of Africa - Vrh</title>
   <link rel="stylesheet" href="./output.css">
 </head>
 <body class="bg-gradient-to-r from-light-brown to-black via-dark-brown text-gray-800 min-h-screen flex flex-col">
@@ -28,6 +28,7 @@
       </div>
     </div>
   </header>
+
   <script>
     document.getElementById('menu-toggle').addEventListener('click', function() {
       const menu = document.getElementById('menu-nav');
@@ -43,48 +44,132 @@
   </script>
 
   <main class="flex-grow container mx-auto px-4 py-8 mb-8">
-    <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl text-white underline font-bold mb-8 uppercase" id="vrh-title">VRH A</h1>
+  <h1 class="text-center text-2xl sm:text-3xl lg:text-4xl text-white underline font-bold mb-8 uppercase" id="vrh-title">VRH</h1>
 
-    <div class="bg-yellow-100 shadow-md rounded-2xl p-4 sm:p-6 max-w-6xl mx-auto">
-      
-      <section class="mb-8">
-        <h2 class="text-xl font-bold text-dark-brown mb-4">O vrhu:</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <p class="text-gray-700 mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            <p class="text-gray-700">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          </div>
-          <div>
-            <img src="imgs/18-Phoebe_25fb.jpg" alt="O vrhu" class="w-full h-64 object-cover rounded-lg shadow-lg">
-          </div>
+  <div class="bg-yellow-100 shadow-md rounded-2xl p-4 sm:p-6 max-w-6xl mx-auto">
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-dark-brown mb-4">O vrhu:</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <p id="litter-text1" class="text-gray-700 mb-4"></p>
+          <p id="litter-text2" class="text-gray-700"></p>
         </div>
-      </section>
+        <div>
+          <img id="litter-hero" src="" alt="O vrhu" class="w-full h-64 object-cover rounded-lg shadow-lg hidden">
+        </div>
+      </div>
+    </section>
 
-      <section class="mb-8">
-        <h2 class="text-xl font-bold text-dark-brown mb-4">Fotky štěňat:</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <img src="imgs/304-C_litter_day_73-154.jpg" alt="Štěňata 1" class="w-full h-64 object-cover rounded-lg shadow-lg">
-          <img src="imgs/303-C_litter_day_73-046.jpg" alt="Štěňata 2" class="w-full h-64 object-cover rounded-lg shadow-lg">
-        </div>
-      </section>
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-dark-brown mb-4">Fotky štěňat:</h2>
+      <div id="puppy-photos" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+    </section>
 
-      <section class="mb-8">
-        <h2 class="text-xl font-bold text-dark-brown mb-4">Fotky rodičů:</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <img src="imgs/rodic1.png" alt="Rodič 1" class="w-full h-64 object-cover rounded-lg shadow-lg">
-          <img src="imgs/18-Phoebe_25fb.jpg" alt="Rodič 2" class="w-full h-64 object-cover rounded-lg shadow-lg">
-          <img src="imgs/rodic2.png" alt="Rodič 3" class="w-full h-64 object-cover rounded-lg shadow-lg">
-        </div>
-      </section>
+    <section class="mb-8">
+      <h2 class="text-xl font-bold text-dark-brown mb-4">Fotky rodičů:</h2>
+      <div id="parent-photos" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div>
+    </section>
 
-      <section>
-        <h2 class="text-xl font-bold text-dark-brown mb-4">Seznam štěňat:</h2>
-        <div id="puppies-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <!-- Štěňata budou dynamicky vložena pomocí JavaScriptu -->
-        </div>
-      </section>
-    </div>
-  </main>
+    <section>
+      <h2 class="text-xl font-bold text-dark-brown mb-4">Seznam štěňat:</h2>
+      <div id="puppies-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+  </div>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", async () => {
+    const params = new URLSearchParams(window.location.search);
+    const vrh = (params.get("vrh") || "A").toUpperCase();
+
+    const titleEl = document.getElementById("vrh-title");
+    titleEl.textContent = "VRH " + vrh;
+    document.title = "Pride of Africa - Vrh " + vrh;
+
+    const text1El = document.getElementById("litter-text1");
+    const text2El = document.getElementById("litter-text2");
+    const heroEl = document.getElementById("litter-hero");
+    const puppyPhotosEl = document.getElementById("puppy-photos");
+    const parentPhotosEl = document.getElementById("parent-photos");
+    const puppiesListEl = document.getElementById("puppies-list");
+
+    const norm = (p) => (!p ? "" : (p.startsWith("/") ? p : "/" + p));
+    const photoPath = (x) => (typeof x === "string" ? x : (x && x.image) ? x.image : "");
+
+    try {
+      const res = await fetch("/data/litters.json", { cache: "no-store" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+
+      const data = await res.json();
+      const items = Array.isArray(data.items) ? data.items : [];
+
+      const litter = items.find(l => (l.letter || "").toUpperCase() === vrh);
+      if (!litter) {
+        text1El.textContent = "Vrh nebyl nalezen.";
+        text2El.textContent = "";
+        heroEl.classList.add("hidden");
+        heroEl.removeAttribute("src");
+        puppyPhotosEl.innerHTML = "";
+        parentPhotosEl.innerHTML = "";
+        puppiesListEl.innerHTML = "";
+        return;
+      }
+
+      const detail = litter.detail || {};
+
+      text1El.textContent = detail.text1 || "";
+      text2El.textContent = detail.text2 || "";
+
+      if (detail.heroImage) {
+        heroEl.src = norm(detail.heroImage);
+        heroEl.classList.remove("hidden");
+      } else {
+        heroEl.classList.add("hidden");
+        heroEl.removeAttribute("src");
+      }
+
+      const puppyPhotos = Array.isArray(detail.puppyPhotos) ? detail.puppyPhotos : [];
+      puppyPhotosEl.innerHTML = puppyPhotos.length
+        ? puppyPhotos.map((p, i) => `
+            <img src="${norm(photoPath(p))}" alt="Štěně ${i + 1}" loading="lazy"
+                 class="w-full h-64 object-cover rounded-lg shadow-lg">
+          `).join("")
+        : `<p class="text-gray-700">Zatím bez fotek.</p>`;
+
+      const parentPhotos = Array.isArray(detail.parentPhotos) ? detail.parentPhotos : [];
+      parentPhotosEl.innerHTML = parentPhotos.length
+        ? parentPhotos.map((p, i) => `
+            <img src="${norm(photoPath(p))}" alt="Rodič ${i + 1}" loading="lazy"
+                 class="w-full h-64 object-cover rounded-lg shadow-lg">
+          `).join("")
+        : `<p class="text-gray-700">Zatím bez fotek.</p>`;
+
+      const puppies = Array.isArray(litter.puppies) ? litter.puppies : [];
+      puppiesListEl.innerHTML = puppies.length
+        ? puppies.map(p => `
+            <div class="p-4 bg-white/60 rounded-lg shadow">
+              <h3 class="font-bold text-dark-brown mb-2">${p.name || ""}</h3>
+              ${p.image ? `
+                <img src="${norm(p.image)}" alt="${p.name || "Štěně"}" loading="lazy"
+                     class="w-full h-56 object-cover rounded-lg mb-2">
+              ` : ""}
+              ${p.text ? `<p class="text-sm text-gray-700">${p.text}</p>` : ""}
+            </div>
+          `).join("")
+        : `<p class="text-gray-700">Zatím bez seznamu štěňat.</p>`;
+
+    } catch (e) {
+      console.error(e);
+      text1El.textContent = "Nepodařilo se načíst data vrhu.";
+      text2El.textContent = "";
+      heroEl.classList.add("hidden");
+      heroEl.removeAttribute("src");
+      puppyPhotosEl.innerHTML = "";
+      parentPhotosEl.innerHTML = "";
+      puppiesListEl.innerHTML = "";
+    }
+  });
+</script>
+</main>
 
   <footer class="bg-dark-brown text-white py-4 mt-auto">
     <div class="container mx-auto px-4 text-center">
@@ -98,46 +183,5 @@
     </div>
   </footer>
 
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const vrh = urlParams.get('vrh') || 'A';
-    document.getElementById('vrh-title').textContent = 'VRH ' + vrh;
-    document.title = 'Pride of Africa - Vrh ' + vrh;
-
-    // Definice jmen štěňat podle písmene vrhu
-    const puppiesNames = {
-      'A': ['Alex', 'Angel', 'Aura', 'Amy', 'Aris'],
-      'B': ['Barney', 'Blesk', 'Buddy', 'Buffy', 'Bella'],
-      'C': ['Charlie', 'Carlos', 'Chloe', 'Candy', 'Carmen'],
-      'D': ['Dexter', 'Diego', 'Dante', 'Daisy', 'Dora']
-    };
-
-    // Obrázky pro štěňata (cyklicky se opakují)
-    const puppyImages = [
-      'imgs/304-C_litter_day_73-154.jpg',
-      'imgs/303-C_litter_day_73-046.jpg',
-      'imgs/298-C_litter_day_54-4.jpg',
-      'imgs/stene.png',
-      'imgs/stene2.png'
-    ];
-
-    // Získání jmen pro aktuální vrh
-    const currentPuppies = puppiesNames[vrh.toUpperCase()] || puppiesNames['A'];
-
-    // Vytvoření HTML pro štěňata
-    const puppiesList = document.getElementById('puppies-list');
-    currentPuppies.forEach((name, index) => {
-      const puppyDiv = document.createElement('div');
-      puppyDiv.className = 'p-4';
-      puppyDiv.innerHTML = `
-        <h3 class="font-bold text-dark-brown mb-2">${name}</h3>
-        <img src="${puppyImages[index % puppyImages.length]}" alt="${name}" class="w-full h-56 object-cover rounded-lg mb-2">
-        <p class="text-sm text-gray-700">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      `;
-      puppiesList.appendChild(puppyDiv);
-    });
-  </script>
-
 </body>
 </html>
-
